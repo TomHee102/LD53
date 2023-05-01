@@ -25,6 +25,7 @@ public class CollectionTrigger : MonoBehaviour
             isTriggered = true;
             otherPos = other.transform.position;
             otherRb = other.attachedRigidbody;
+            GameManager.gManager.plotDestination();
         }
     }
     void FixedUpdate()

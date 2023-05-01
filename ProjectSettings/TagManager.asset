@@ -7,6 +7,9 @@ TagManager:
   - package
   - platform
   - trigger
+  - deliveryLocation
+  - colTrigger
+  - delTrigger
   layers:
   - Default
   - TransparentFX

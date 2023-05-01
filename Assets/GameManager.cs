@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gManager;
+    public GameObject deliveryTrigger;
     public CollectionTrigger ColTrig;
     [SerializeField]
     private float money;
@@ -17,6 +18,21 @@ public class GameManager : MonoBehaviour
     {
         deliveryTarget = ColTrig.spawnNo;
         scoreText.text = money.ToString();
+    }
+
+    public void plotDestination()
+    {
+        GameObject[] deliveryLocations;
+        deliveryLocations = GameObject.FindGameObjectsWithTag("deliveryLocation");
+        GameObject existingTriggers;
+        existingTriggers = GameObject.FindGameObjectWithTag("delTrigger");
+        int locationChoice = Random.Range(1, deliveryLocations.Length + 1);
+
+        if (existingTriggers == false)
+        {
+            Vector3 spawnOffset = new Vector3(0f, 3.5f, 0f);
+            Instantiate(deliveryTrigger, deliveryLocations[locationChoice].transform.position + spawnOffset, Quaternion.identity);
+        } 
     }
 
     public void checkDelivery()
