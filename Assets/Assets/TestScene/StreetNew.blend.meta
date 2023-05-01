@@ -22,11 +22,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Fence
-    second: {fileID: 2100000, guid: d742fe21afe8b42438d5db927b43c062, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Field
     second: {fileID: 2100000, guid: 8dbdcdc1b17a1e943b589cb9b5f2708e, type: 2}
   - first:
@@ -49,11 +44,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Litter
     second: {fileID: 2100000, guid: ce38a43fa2549364fa0cdc7ffcc1daae, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Long Stretch
-    second: {fileID: 2100000, guid: 6d1e8674e1366464ca765932b4eea7b8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -82,18 +72,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: m_59572f9c-a7e3-9fa2-978f-d04355cab1ad
-    second: {fileID: 2100000, guid: c2122d3b2ce3fd647a4d801854a447f2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: m_70643e93-326e-0194-edf9-d7a45848f28b
-    second: {fileID: 2100000, guid: 1b82473573dce9443902581cf7b91ca5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: m_fbef68ea-8c9b-f73f-f29f-c70a26c5dbcb
-    second: {fileID: 2100000, guid: 9d8fdef9e1c37e94495c92d43b7516f7, type: 2}
+    second: {fileID: 2100000, guid: d742fe21afe8b42438d5db927b43c062, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -130,15 +110,15 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.56
+    globalScale: 1
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -183,7 +163,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.56
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
