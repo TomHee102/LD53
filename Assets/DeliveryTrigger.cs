@@ -8,9 +8,13 @@ public class DeliveryTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "packaged")
+        if (other.gameObject.tag == "package")
         {
+            Debug.Log("Delivery Point");
+            isTriggered = true;
+            Destroy(other.gameObject);
 
+            GameManager.gManager.checkDelivery();
         }
     }
     void Update()
