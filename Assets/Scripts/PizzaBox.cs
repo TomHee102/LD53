@@ -8,6 +8,8 @@ public class PizzaBox : MonoBehaviour
     public Rigidbody rb;
     [SerializeField] GameObject damagedPrefab;
 
+    GameObject damagedPizza;
+
     Vector3 storedPostion;
     Quaternion storedRotation;
     [SerializeField] Vector3 displacement;
@@ -23,9 +25,13 @@ public class PizzaBox : MonoBehaviour
 
     RaycastHit hit;
 
+    private void Awake() {
+        damagedPizza = Instantiate(damagedPrefab);
+        damagedPizza.SetActive(false);
+    }
     private void OnCollisionEnter(Collision other) {
-        var raycast = Physics.Raycast(transform.position,Vector3.down, out hit, 2f);
-        Debug.DrawRay(transform.position,Vector3.down*2f, Color.red, Mathf.Infinity);
+        var raycast = Physics.Raycast(transform.position,Vector3.down, out hit, 0.1f);
+        Debug.DrawRay(transform.position,Vector3.down*0.1f, Color.red, Mathf.Infinity);
         if(raycast)
         {
                 if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package" )
@@ -55,7 +61,7 @@ public class PizzaBox : MonoBehaviour
 
     void OnDestroy()
     {
-        var damagedPizza = Instantiate(damagedPrefab);
+        damagedPizza.SetActive(true);
         damagedPizza.transform.position = transform.position;
         damagedPizza.transform.rotation = transform.rotation;
         damagedPizza.GetComponent<Rigidbody>().velocity = rb.velocity;
@@ -83,8 +89,8 @@ public class PizzaBox : MonoBehaviour
             targetRotation = targetPackage.transform.rotation.eulerAngles;    
 
             float distanceToTarget = Vector3.Distance(rb.position,targetPosition);
-            rotationMod = (Mathf.Clamp(distanceToTarget, 0, 0.5f)) / 0.5f;
-            if(Vector3.Distance(rb.position,targetPosition) > 0.05f)
+            rotationMod = (1-Mathf.Clamp(distanceToTarget, 0, 0.5f)) / 0.5f;
+            if(Vector3.Distance(rb.position,targetPosition) > 0.005f)
             {
                 var pos = rb.position;
                 pos.x = Mathf.Lerp(pos.x,targetPosition.x,rotationMod);
