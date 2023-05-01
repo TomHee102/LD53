@@ -34,12 +34,15 @@ public class PizzaBox : MonoBehaviour
         Debug.DrawRay(transform.position,Vector3.down*0.1f, Color.red, Mathf.Infinity);
         if(raycast)
         {
-                if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package" )
+                if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package")
                 {
                     allCollisions.Remove(hit.collider);
 
-                    //Create Damaged Asset
-                    isDestroyed = true;
+                    if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
+                    {
+                        //Create Damaged Asset
+                        isDestroyed = true;
+                    }
                 }
                 else if(!allCollisions.Contains(hit.collider))
                 {
