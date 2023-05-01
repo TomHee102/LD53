@@ -21,7 +21,7 @@ public class PizzaBox : MonoBehaviour
     [SerializeField] float rotationMod;
     public int proximityToPlatform = 0;
     public GameObject platformInStructure;
-    private bool isDestroyed = false;
+    private bool isDamaged = false;
 
     RaycastHit hit;
 
@@ -29,9 +29,9 @@ public class PizzaBox : MonoBehaviour
         damagedPizza = Instantiate(damagedPrefab);
         damagedPizza.SetActive(false);
     }
-    private void OnCollisionEnter(Collision other) {
-        var raycast = Physics.Raycast(transform.position,Vector3.down, out hit, 0.1f);
-        Debug.DrawRay(transform.position,Vector3.down*0.1f, Color.red, Mathf.Infinity);
+    private void OnCollisionStay(Collision other) {
+        var raycast = Physics.Raycast(transform.position,Vector3.down, out hit, 0.5f);
+        Debug.DrawRay(transform.position,Vector3.down*0.5f, Color.red, Mathf.Infinity);
         if(raycast)
         {
                 if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package" && hit.collider.gameObject.tag != "trigger")
@@ -41,7 +41,7 @@ public class PizzaBox : MonoBehaviour
                     if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
                     {
                         //Create Damaged Asset
-                        isDestroyed = true;
+                        isDamaged = true;
                     }
                 }
                 else if(!allCollisions.Contains(hit.collider))
@@ -64,13 +64,17 @@ public class PizzaBox : MonoBehaviour
 
     void OnDestroy()
     {
-        damagedPizza.SetActive(true);
-        damagedPizza.transform.position = transform.position;
-        damagedPizza.transform.rotation = transform.rotation;
-        damagedPizza.GetComponent<Rigidbody>().velocity = rb.velocity;
-        targetPackage = null;
-        platformInStructure = null; 
-        GameManager.gManager.damageCharge();       
+        if(isDamaged)
+        {
+            damagedPizza.SetActive(true);
+            damagedPizza.transform.position = transform.position;
+            damagedPizza.transform.rotation = transform.rotation;
+            damagedPizza.GetComponent<Rigidbody>().velocity = rb.velocity;
+            targetPackage = null;
+            platformInStructure = null; 
+            GameManager.gManager.damageCharge();  
+        }
+  
     }
 
     private void OnCollisionExit(Collision other) {
@@ -93,7 +97,7 @@ public class PizzaBox : MonoBehaviour
             targetRotation = targetPackage.transform.rotation.eulerAngles;    
 
             float distanceToTarget = Vector3.Distance(rb.position,targetPosition);
-            rotationMod = (1-Mathf.Clamp(distanceToTarget, 0, 0.5f)) / 0.5f;
+            rotationMod = (1-Mathf.Clamp(distanceToTarget, 0, 5f)) / 5f;
             if(Vector3.Distance(rb.position,targetPosition) > 0.005f)
             {
                 var pos = rb.position;
@@ -103,7 +107,7 @@ public class PizzaBox : MonoBehaviour
             }
             Quaternion.Slerp(rb.rotation,Quaternion.Euler(rb.rotation.x, targetRotation.y, rb.rotation.z), rotationMod);
         }
-        if(isDestroyed)
+        if(isDamaged)
         {
             Destroy(this.gameObject);
         }
