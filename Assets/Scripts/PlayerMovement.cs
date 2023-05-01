@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public float movementSpeed;
     public float turnSpeed;
+    public Transform cam;
 
     private Vector3 movement;
     private Vector3 direction;
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private float Time;
     [SerializeField]
     private AnimationCurve animCurve;
+
+    public ParticleSystem smoke;
+    public ParticleSystemRenderer smokeRenderer;
 
     // Update is called once per frame
     void Update()
@@ -58,25 +62,40 @@ public class PlayerMovement : MonoBehaviour
             }
 
             RotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, infoVector), animCurve.Evaluate(Time));
-            transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.rotation.eulerAngles.y, RotationRef.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.rotation.eulerAngles.y + cam.eulerAngles.y, RotationRef.eulerAngles.z);
         }
 
         GroundedCheck();
+
+        ParticleSystem.EmissionModule smokeEmission = smoke.emission;
+        var smokeMain = smoke.main;
+        var smokeRenPivot = smokeRenderer.pivot;
+        var smokeRotation = smoke.transform.rotation;
 
         if(isGrounded)
         {
             if (movement.x > 0f)
             {
-                rb.AddForce((rb.transform.forward) * movementSpeed);
+                rb.AddForce((rb.transform.forward) * movementSpeed);   
+                smokeMain.startSpeed = 4.32f;
+                smokeRotation.x = -180; 
+                smoke.Play();
             }
             else if (movement.x < 0f)
             {
-                rb.AddForce(((rb.transform.forward) * -1) * movementSpeed);           
+                rb.AddForce(((rb.transform.forward) * -1) * movementSpeed);
+                smokeMain.startSpeed = -4.32f; 
+                smokeRotation.x = 60;       
+                smoke.Play();
+            }
+            else
+            {
+                smoke.Stop();
             }
         }
 
-        
         rb.angularVelocity = (direction * turnSpeed);
+
     }
 
     void GroundedCheck()
