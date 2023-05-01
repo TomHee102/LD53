@@ -34,7 +34,7 @@ public class PizzaBox : MonoBehaviour
         Debug.DrawRay(transform.position,Vector3.down*0.1f, Color.red, Mathf.Infinity);
         if(raycast)
         {
-                if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package")
+                if(hit.collider.gameObject.tag != "platform" && hit.collider.gameObject.tag != "package" && hit.collider.gameObject.tag != "trigger")
                 {
                     allCollisions.Remove(hit.collider);
 
@@ -69,7 +69,8 @@ public class PizzaBox : MonoBehaviour
         damagedPizza.transform.rotation = transform.rotation;
         damagedPizza.GetComponent<Rigidbody>().velocity = rb.velocity;
         targetPackage = null;
-        platformInStructure = null;        
+        platformInStructure = null; 
+        GameManager.gManager.damageCharge();       
     }
 
     private void OnCollisionExit(Collision other) {

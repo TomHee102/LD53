@@ -8,8 +8,13 @@ public class CollectionTrigger : MonoBehaviour
     private bool isTriggered = false;
     private Vector3 otherPos;
     private Rigidbody otherRb;
+    [SerializeField]
     public int spawnNo;
     private int i = 0;
+    void Awake()
+    {
+        spawnNo = Random.Range(1, 7);
+    }
     void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -22,7 +27,6 @@ public class CollectionTrigger : MonoBehaviour
     }
     void FixedUpdate()
     {
-
         if (i < spawnNo && isTriggered && otherRb.velocity.x < 0.1f)
         {
             Vector3 spawnOffset = new Vector3(0f, 3, 0f);
