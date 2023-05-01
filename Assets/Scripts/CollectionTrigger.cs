@@ -15,17 +15,22 @@ public class CollectionTrigger : MonoBehaviour
     private GameObject previousPiza;
     void Awake()
     {
-        spawnNo = Random.Range(1, 7);
+        
     }
     void OnTriggerStay(Collider other)
     {
+        GameObject[] pizzas;
+        pizzas = GameObject.FindGameObjectsWithTag("package");
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Collection Point!");
-            isTriggered = true;
-            otherPos = other.transform.position;
-            otherRb = other.attachedRigidbody;
-            GameManager.gManager.plotDestination();
+            if(pizzas.Length == 0)
+            {
+                Debug.Log("Collection Point!");
+                isTriggered = true;
+                otherPos = other.transform.position;
+                otherRb = other.attachedRigidbody;
+                GameManager.gManager.plotDestination();
+            }
         }
     }
     void FixedUpdate()
@@ -39,7 +44,11 @@ public class CollectionTrigger : MonoBehaviour
             if(previousPiza != null)
                 temp.transform.position = previousPiza.transform.position + spawnOffset;
             if(i == spawnNo -1)
+            {
                 previousPiza = null;
+                isTriggered = false;
+                i = 0;
+            }
             else
                 previousPiza = temp;
             i++;

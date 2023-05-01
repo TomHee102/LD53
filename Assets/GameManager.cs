@@ -39,15 +39,21 @@ public class GameManager : MonoBehaviour
     {
         GameObject[] pizzaNo;
         pizzaNo = GameObject.FindGameObjectsWithTag("package");
+        GameObject[] trigger = GameObject.FindGameObjectsWithTag("delTrigger");
         
         if  (pizzaNo.Length == 0)
         {
             Debug.Log("You failed! good day sir!");
+            Destroy(trigger[0]);
+            ColTrig.spawnNo = Random.Range(1, 7);
         }
         else
         {
             Debug.Log("Delivery Success");
             money = 2.50f * pizzaNo.Length;
+            ColTrig.spawnNo = Random.Range(1,7);
+            Destroy(trigger[0]);
+            ColTrig.spawnNo = Random.Range(1, 7);
         }
     }
 

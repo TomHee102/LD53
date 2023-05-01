@@ -12,7 +12,8 @@ public class DeliveryTrigger : MonoBehaviour
         {
             Debug.Log("Delivery Point");
             isTriggered = true;
-            Destroy(other.gameObject);
+            GameObject pizzas = GameObject.FindGameObjectWithTag("package");
+            Destroy(pizzas);
 
             GameManager.gManager.checkDelivery();
         }
