@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 movement;
     private Vector3 direction;
+    private bool isGrounded = false;
 
     [SerializeField]
     private LayerMask Environment;
@@ -32,9 +33,8 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
         Quaternion RotationRef = Quaternion.Euler(0, 0, 0);
-        Debug.DrawRay(transform.position, -transform.up, Color.red);
 
-        if (Physics.Raycast(ray, out hit, 1f, Environment))
+        if (Physics.Raycast(ray, out hit, 2f, Environment))
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 down = transform.TransformDirection(Vector3.down);
@@ -61,15 +61,39 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.rotation.eulerAngles.y, RotationRef.eulerAngles.z);
         }
 
-        if (movement.x > 0f)
+        GroundedCheck();
+
+        if(isGrounded)
         {
-            rb.AddForce((rb.transform.forward) * movementSpeed);
+            if (movement.x > 0f)
+            {
+                rb.AddForce((rb.transform.forward) * movementSpeed);
+            }
+            else if (movement.x < 0f)
+            {
+                rb.AddForce(((rb.transform.forward) * -1) * movementSpeed);           
+            }
         }
-        else if (movement.x < 0f)
-        {
-            rb.AddForce(((rb.transform.forward) * -1) * movementSpeed);           
-        }
+
         
         rb.angularVelocity = (direction * turnSpeed);
+    }
+
+    void GroundedCheck()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hit = new RaycastHit();
+
+        Debug.Log(isGrounded);
+
+        if(Physics.Raycast(ray, out hit, 0.1f, Environment))
+        {
+            Debug.DrawLine(ray.origin, hit.point);
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 }
