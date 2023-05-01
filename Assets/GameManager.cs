@@ -7,9 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gManager;
     public GameObject deliveryTrigger;
+    public GameObject existingTriggers;
+    public GameObject[] pizzaNo;
     public CollectionTrigger ColTrig;
     [SerializeField]
     private float money;
+    public int strikes;
     [SerializeField]
     private int deliveryTarget;
     public Text scoreText;
@@ -24,7 +27,6 @@ public class GameManager : MonoBehaviour
     {
         GameObject[] deliveryLocations;
         deliveryLocations = GameObject.FindGameObjectsWithTag("deliveryLocation");
-        GameObject existingTriggers;
         existingTriggers = GameObject.FindGameObjectWithTag("delTrigger");
         int locationChoice = Random.Range(1, deliveryLocations.Length + 1);
 
@@ -41,19 +43,27 @@ public class GameManager : MonoBehaviour
         pizzaNo = GameObject.FindGameObjectsWithTag("package");
         GameObject[] trigger = GameObject.FindGameObjectsWithTag("delTrigger");
         
-        if  (pizzaNo.Length == 0)
-        {
-            Debug.Log("You failed! good day sir!");
-            Destroy(trigger[0]);
-            ColTrig.spawnNo = Random.Range(1, 7);
-        }
-        else
+        for (int i = 0; i < pizzaNo.Length; i++)
         {
             Debug.Log("Delivery Success");
             money = 2.50f * pizzaNo.Length;
-            ColTrig.spawnNo = Random.Range(1,7);
-            Destroy(trigger[0]);
-            ColTrig.spawnNo = Random.Range(1, 7);
+            Destroy(pizzaNo[i]);
+        }
+
+        Destroy(trigger[0]);
+        ColTrig.spawnNo = Random.Range(1, 7);
+    }
+    public bool isOrderFailed()
+    {   
+        pizzaNo = GameObject.FindGameObjectsWithTag("package");
+        if (pizzaNo.Length == 0)
+        {
+            Destroy(existingTriggers);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -61,6 +71,10 @@ public class GameManager : MonoBehaviour
     {
         money -= 2.50f;
         Debug.Log("You have been charged for crimes against pizza :(");
+        if(isOrderFailed())
+        {
+            strikes++;
+        }
     }
 
     void Awake()

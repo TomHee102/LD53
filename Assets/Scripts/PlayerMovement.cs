@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         movement = new Vector3(Input.GetAxisRaw("Vertical"), 0f, 0f).normalized;
         direction = new Vector3(0f, Input.GetAxisRaw("Horizontal"), 0f).normalized;
 
-        Ray ray = new Ray(transform.position, Vector3.down);
+        /* Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
         Quaternion RotationRef = Quaternion.Euler(0, 0, 0);
 
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
             RotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, infoVector), animCurve.Evaluate(Time));
             transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.rotation.eulerAngles.y + cam.eulerAngles.y, RotationRef.eulerAngles.z);
-        }
+        } */
 
         GroundedCheck();
 
