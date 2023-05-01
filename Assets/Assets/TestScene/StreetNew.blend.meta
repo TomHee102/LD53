@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bowl
-    second: {fileID: 2100000, guid: 86ce53f4a5a0f6c47a3eebc021c6dfa4, type: 2}
+      name: Blue
+    second: {fileID: 2100000, guid: 144ab0afff77c0f40a23a0114a15aba8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bricks
+    second: {fileID: 2100000, guid: 0c123cfbb7dfff9408ede7edbfb108df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: 1db9d3746e0c3b14481fb1526909bc6a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -19,6 +29,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: CornerGrass
     second: {fileID: 2100000, guid: c842d8c25cc84364680c67912196898b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence
+    second: {fileID: 2100000, guid: d742fe21afe8b42438d5db927b43c062, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -37,6 +52,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: HouseMain
+    second: {fileID: 2100000, guid: da2b42925f252de45bf7faae4b2a80e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HouseMain.001
+    second: {fileID: 2100000, guid: 1b3ea9c9f1ec23a499919ae6379c9c0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: LargeGrass
     second: {fileID: 2100000, guid: 0c9e56b81f444f047a9bb3646679c458, type: 2}
   - first:
@@ -44,6 +69,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Litter
     second: {fileID: 2100000, guid: ce38a43fa2549364fa0cdc7ffcc1daae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Long Stretch
+    second: {fileID: 2100000, guid: 6d1e8674e1366464ca765932b4eea7b8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -62,6 +92,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: cae43ab8a9db79d429e1c845c83abecd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: SmallGrassCorner
     second: {fileID: 2100000, guid: a346c96423b9eb342a31f78ba318ecc5, type: 2}
   - first:
@@ -72,17 +107,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: m_fbef68ea-8c9b-f73f-f29f-c70a26c5dbcb
-    second: {fileID: 2100000, guid: d742fe21afe8b42438d5db927b43c062, type: 2}
+      name: m_59572f9c-a7e3-9fa2-978f-d04355cab1ad
+    second: {fileID: 2100000, guid: c2122d3b2ce3fd647a4d801854a447f2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: none
-    second: {fileID: 2100000, guid: b5008f3a9f07f8e42880e1c49f193aba, type: 2}
+      name: m_70643e93-326e-0194-edf9-d7a45848f28b
+    second: {fileID: 2100000, guid: 1b82473573dce9443902581cf7b91ca5, type: 2}
   materials:
     materialImportMode: 2
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -110,9 +145,9 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.25
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
@@ -163,7 +198,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.25
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
