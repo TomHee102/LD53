@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 movement;
     private Vector3 direction;
-    private bool isGrounded = false;
+    public bool isGrounded = false;
 
     [SerializeField]
     private LayerMask Environment;
@@ -65,7 +65,10 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.rotation.eulerAngles.y + cam.eulerAngles.y, RotationRef.eulerAngles.z);
         } */
 
-        GroundedCheck();
+        if (GameManager.gManager.gameActive == true)
+        {
+            GroundedCheck();
+        }
 
         ParticleSystem.EmissionModule smokeEmission = smoke.emission;
         var smokeMain = smoke.main;

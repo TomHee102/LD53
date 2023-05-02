@@ -35,9 +35,10 @@ public class CollectionTrigger : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (i < spawnNo && isTriggered && otherRb.velocity.x < 0.1f)
+        Vector3 spawnOffset = new Vector3(0f, 3f, 0f);
+
+        if (i < spawnNo && isTriggered && otherRb.velocity.magnitude < 0.1f)
         {
-            Vector3 spawnOffset = new Vector3(0f, 3, 0f);
             var temp = Instantiate(pizza, otherPos + spawnOffset, Quaternion.identity);
             temp.name = i.ToString();
             temp.GetComponent<PizzaBox>().targetPackage = previousPiza;

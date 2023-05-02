@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gManager;
     public GameObject deliveryTrigger;
     public GameObject existingTriggers;
+    public PlayerMovement PlayerMovement;
+    public GameObject gameOver;
+    public bool gameActive = true;
     public GameObject[] pizzaNo;
     public CollectionTrigger ColTrig;
     [SerializeField]
@@ -16,11 +20,30 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int deliveryTarget;
     public Text scoreText;
+    public Text strikeText;
+    public Text youmadeText;
 
     void Update()
     {
+        if(gameActive == false && Input.GetAxisRaw("Jump") > 0.1f)
+        {
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("TestScene");
+
+        }
+
         deliveryTarget = ColTrig.spawnNo;
-        scoreText.text = money.ToString();
+        scoreText.text = "$" + money.ToString();
+        if(strikes == 1)
+        {
+            strikeText.text = "You have " + strikes.ToString() + " strike!";
+        }
+        else
+        {
+            strikeText.text = "You have " + strikes.ToString() + " strikes!";
+        }
+        youmadeText.text = "You made " + money.ToString() + " dollars!";
+
     }
 
     public void plotDestination()
@@ -74,6 +97,12 @@ public class GameManager : MonoBehaviour
         if(isOrderFailed())
         {
             strikes++;
+            if(strikes == 3)
+            {
+                gameOver.SetActive(true);
+                gameActive = false;
+                PlayerMovement.isGrounded = false;
+            }
         }
     }
 
