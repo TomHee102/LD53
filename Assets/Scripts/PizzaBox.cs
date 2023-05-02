@@ -43,12 +43,13 @@ public class PizzaBox : MonoBehaviour
                         //Create Damaged Asset
                         isDamaged = true;
                     }
-                }
-                else if(hit.collider.gameObject.tag != "package")
-                {
+                    else if(other.gameObject.GetComponent<PizzaBox>().platformInStructure == null)
+                    {
                     if(other.gameObject.GetComponent<PizzaBox>().platformInStructure == null)
                         isDamaged = true;
+                    }
                 }
+
                 else if(!allCollisions.Contains(hit.collider))
                 {
                     allCollisions.Add(hit.collider);     
